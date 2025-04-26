@@ -1,0 +1,94 @@
+[gd_scene load_steps=14 format=3 uid="uid://drqwuq6mpi0dt"]
+
+[sub_resource type="Gradient" id="Gradient_0xm2m"]
+colors = PackedColorArray(0.705194, 0.705194, 0.705194, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_h2yge"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_1bvp3"]
+seamless = true
+color_ramp = SubResource("Gradient_0xm2m")
+noise = SubResource("FastNoiseLite_h2yge")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0xm2m"]
+albedo_color = Color(0.448051, 0.295797, 0.161509, 1)
+albedo_texture = SubResource("NoiseTexture2D_1bvp3")
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_0xm2m"]
+top_radius = 0.08
+bottom_radius = 0.08
+height = 0.3
+radial_segments = 32
+rings = 0
+
+[sub_resource type="Gradient" id="Gradient_lquwl"]
+colors = PackedColorArray(0.677567, 0.677567, 0.677567, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_7mycd"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_272bh"]
+seamless = true
+color_ramp = SubResource("Gradient_lquwl")
+noise = SubResource("FastNoiseLite_7mycd")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h2yge"]
+albedo_color = Color(0.384897, 0.622, 0.160537, 1)
+albedo_texture = SubResource("NoiseTexture2D_272bh")
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_1bvp3"]
+top_radius = 0.3
+height = 0.5
+radial_segments = 32
+rings = 0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_h2yge"]
+top_radius = 0.15
+bottom_radius = 0.45
+height = 0.65
+radial_segments = 32
+rings = 0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_lquwl"]
+top_radius = 0.0
+bottom_radius = 0.35
+height = 0.5
+radial_segments = 32
+rings = 0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_0xm2m"]
+radius = 0.4
+
+[node name="Tree" type="Node3D"]
+
+[node name="Base" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.866025, -0.5, 0, 0.5, 0.866025, 0, 0, 0)
+
+[node name="Stump" type="MeshInstance3D" parent="Base"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.135681, 0)
+material_override = SubResource("StandardMaterial3D_0xm2m")
+mesh = SubResource("CylinderMesh_0xm2m")
+skeleton = NodePath("../..")
+
+[node name="Branch1" type="MeshInstance3D" parent="Base"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.485063, 0)
+material_override = SubResource("StandardMaterial3D_h2yge")
+mesh = SubResource("CylinderMesh_1bvp3")
+skeleton = NodePath("../..")
+
+[node name="Branch2" type="MeshInstance3D" parent="Base"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.932031, 0)
+material_override = SubResource("StandardMaterial3D_h2yge")
+mesh = SubResource("CylinderMesh_h2yge")
+skeleton = NodePath("../..")
+
+[node name="Branch3" type="MeshInstance3D" parent="Base"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25188, 0)
+material_override = SubResource("StandardMaterial3D_h2yge")
+mesh = SubResource("CylinderMesh_lquwl")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Base"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Base/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.456769, 0)
+shape = SubResource("CylinderShape3D_0xm2m")
